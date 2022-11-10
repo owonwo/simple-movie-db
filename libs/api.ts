@@ -20,10 +20,4 @@ export const searchForMovie = (params: { searchStr: string }) => {
   });
 };
 
-export const getPopularMovies = () => {
-  return basePath(
-    `/movie/popular?api_key=${process.env.NEXT_PUBLIC_MOVIE_DB_API_KEY_V3}`
-  );
-};
-
 export const getMovie = (id: string) => basePath(`/movie/${id}`);
