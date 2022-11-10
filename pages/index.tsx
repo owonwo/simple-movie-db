@@ -41,7 +41,7 @@ export default function Home() {
 
         {movies.map((movie) => {
           return (
-            <Link key={movie.id} href={`/movies/${movie.id}`} passHref>
+            <Link key={movie.id} href={`/movie/${movie.id}`}>
               {movie.poster_path ? (
                 <Image
                   src={movie.getPosterPath()}

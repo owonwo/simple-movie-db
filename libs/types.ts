@@ -6,3 +6,14 @@ export type Movie = {
   getYear(): string;
   getPosterPath(): string;
 };
+
+type Genre = {
+  id: number;
+  name: string;
+};
+
+export type MovieAttributes = {
+  overview: string;
+  tagline: string;
+  genres: Genre[];
+};

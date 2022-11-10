@@ -1,4 +1,3 @@
-import { pick } from "lodash";
 import { Movie } from "./types";
 
 const MovieProto = {
@@ -14,11 +13,8 @@ const MovieProto = {
 };
 
 export class MovieFactory {
-  static create<T extends Record<any, any>>(item: T): Movie {
-    return Object.assign(
-      Object.create(MovieProto),
-      pick(item, ["id", "title", "release_date", "poster_path"])
-    );
+  static create<T extends Record<any, any>>(item: T): T {
+    return Object.assign(Object.create(MovieProto), item);
   }
 
   static collection(items: any[]): Movie[] {
