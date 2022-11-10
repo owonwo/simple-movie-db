@@ -1,11 +1,10 @@
 import React from "react";
-import Image from "next/image";
-import Link from "next/link";
 import useSWR from "swr";
 import { debounce, isEmpty } from "lodash";
 import { searchForMovie, fetcher } from "../libs/api";
 import { MovieFactory } from "../libs/factories";
 import styles from "../styles/Home.module.css";
+import { MovieCard } from "../components/MovieCard";
 
 export default function Home() {
   const [searchStr, setSearchStr] = React.useState("");
@@ -35,32 +34,13 @@ export default function Home() {
       </section>
 
       <section>
-        {movies.length > 0
-          ? null
-          : !isEmpty(searchStr) && <p>No Result found</p>}
+        {isLoading ? null : movies.length > 0 && !isEmpty(searchStr) ? null : (
+          <p>No Result found</p>
+        )}
 
-        {movies.map((movie) => {
-          return (
-            <Link key={movie.id} href={`/movie/${movie.id}`}>
-              {movie.poster_path ? (
-                <Image
-                  src={movie.getPosterPath()}
-                  alt={movie.title}
-                  width={220}
-                  height={330}
-                />
-              ) : (
-                <div style={{ width: 220, height: 330 }}>
-                  No Image <br /> Available
-                </div>
-              )}
-              <p>
-                {movie.title} &nbsp;&nbsp;
-                <span>{movie.getYear()}</span>
-              </p>
-            </Link>
-          );
-        })}
+        {movies.map((movie) => (
+          <MovieCard movie={movie} />
+        ))}
       </section>
     </div>
   );

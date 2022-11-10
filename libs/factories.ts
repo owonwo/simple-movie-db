@@ -13,7 +13,7 @@ const MovieProto = {
 };
 
 export class MovieFactory {
-  static create<T extends Record<any, any>>(item: T): T {
+  static create<T extends Movie>(item: Record<string, any>): T {
     return Object.assign(Object.create(MovieProto), item);
   }
 
