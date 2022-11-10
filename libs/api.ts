@@ -2,7 +2,10 @@ export const fetcher = (...args: Parameters<typeof fetch>) => {
   return fetch(...args).then((res) => res.json());
 };
 
-const url = (path: string, searchParams?: Record<string, string>) => {
+export const basePath = (
+  path: string,
+  searchParams?: Record<string, string>
+) => {
   const query = new URLSearchParams(searchParams);
 
   if (process.env.NEXT_PUBLIC_MOVIE_DB_API_KEY_V3)
@@ -12,15 +15,15 @@ const url = (path: string, searchParams?: Record<string, string>) => {
 };
 
 export const searchForMovie = (params: { searchStr: string }) => {
-  return url(`/search/movie`, {
+  return basePath(`/search/movie`, {
     query: encodeURI(params.searchStr),
   });
 };
 
 export const getPopularMovies = () => {
-  return url(
+  return basePath(
     `/movie/popular?api_key=${process.env.NEXT_PUBLIC_MOVIE_DB_API_KEY_V3}`
   );
 };
 
-export const getMovie = (id: string) => url(`/movie/${id}`);
+export const getMovie = (id: string) => basePath(`/movie/${id}`);
