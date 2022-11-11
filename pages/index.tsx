@@ -1,11 +1,12 @@
 import React from "react";
 import useSWR from "swr";
-import { debounce, isEmpty } from "lodash";
+import { debounce, isArray, isEmpty } from "lodash";
 import { searchForMovie, fetcher } from "../libs/api";
 import { MovieFactory } from "../libs/factories";
 import styles from "../styles/Home.module.css";
 import { MovieCard } from "../components/MovieCard";
 import { LoadMore } from "../components/LoadMore";
+import { Movie } from "../libs/types";
 
 export default function Home() {
   const [searchStr, setSearchStr] = React.useState("");
@@ -13,6 +14,7 @@ export default function Home() {
     page: 1,
     totalPage: 1,
   });
+  const [movies, setMovies] = React.useState<Movie[]>([]);
   const { data, error } = useSWR(
     () =>
       !isEmpty(searchStr)
@@ -20,9 +22,13 @@ export default function Home() {
         : null,
     fetcher
   );
+  const isLoading = !error && !data;
 
   const handleSearch = React.useCallback(
-    debounce(({ target }) => setSearchStr(target.value.trim()), 500),
+    debounce(({ target }) => {
+      setMovies([]);
+      setSearchStr(target.value.trim());
+    }, 500),
     []
   );
 
@@ -34,8 +40,11 @@ export default function Home() {
       });
   }, [data]);
 
-  const isLoading = !error && !data;
-  const movies = MovieFactory.collection(data?.results || []);
+  React.useEffect(() => {
+    if (isArray(data?.results)) {
+      setMovies((arr) => arr.concat(MovieFactory.collection(data.results)));
+    }
+  }, [data?.page]);
 
   return (
     <div className={styles.container}>
