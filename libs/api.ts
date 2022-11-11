@@ -14,10 +14,13 @@ export const basePath = (
   return `${process.env.NEXT_PUBLIC_API_BASE_URL}${path}?` + query.toString();
 };
 
-export const searchForMovie = (params: { searchStr: string; page: number }) => {
+export const searchForMovie = (params: {
+  searchStr: string;
+  page?: number;
+}) => {
   return basePath(`/search/movie`, {
     query: encodeURI(params.searchStr),
-    page: String(params.page),
+    ...(params?.page ? { page: String(params.page) } : {}),
   });
 };
 

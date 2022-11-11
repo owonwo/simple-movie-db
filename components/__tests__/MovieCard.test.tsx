@@ -20,8 +20,10 @@ describe("MovieCard component", () => {
     );
 
     expect(pretty(container.innerHTML)).toMatchInlineSnapshot(`
-      "<a href="/movie/24">
-        <div style="width: 220px; height: 330px;">No Image <br> Available</div>
+      "<a style="display: inline-flex; flex-direction: column; width: 246px; border: 1px solid #444; padding: 8px;" href="/movie/24">
+        <div style="width: 220px; height: 330px; margin: 4px;">
+          <div style="width: 220px; height: 330px; display: flex; background: rgb(34, 34, 34); justify-content: center; align-items: center;"><span style="text-align: center;">No Image <br> Available</span></div>
+        </div>
         <p>The Wondering &nbsp;&nbsp;<span>2010</span></p>
       </a>"
     `);
@@ -33,8 +35,8 @@ describe("MovieCard component", () => {
     );
 
     expect(pretty(container.innerHTML)).toMatchInlineSnapshot(`
-      "<a href="/movie/24">
-        <div style="width: 220px; height: 330px;"><img alt="The Wondering" srcset="/_next/image?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2ForiginalPOSTER_IMAGE_PATH&amp;w=256&amp;q=75 1x, /_next/image?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2ForiginalPOSTER_IMAGE_PATH&amp;w=640&amp;q=75 2x" src="/_next/image?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2ForiginalPOSTER_IMAGE_PATH&amp;w=640&amp;q=75" width="220" height="330" decoding="async" data-nimg="1" loading="lazy" style="color: transparent;"></div>
+      "<a style="display: inline-flex; flex-direction: column; width: 246px; border: 1px solid #444; padding: 8px;" href="/movie/24">
+        <div style="width: 220px; height: 330px; margin: 4px;"><img alt="The Wondering" srcset="/_next/image?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2ForiginalPOSTER_IMAGE_PATH&amp;w=256&amp;q=75 1x, /_next/image?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2ForiginalPOSTER_IMAGE_PATH&amp;w=640&amp;q=75 2x" src="/_next/image?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2ForiginalPOSTER_IMAGE_PATH&amp;w=640&amp;q=75" width="220" height="330" decoding="async" data-nimg="1" loading="lazy" style="color: transparent;"></div>
         <p>The Wondering &nbsp;&nbsp;<span>2010</span></p>
       </a>"
     `);
