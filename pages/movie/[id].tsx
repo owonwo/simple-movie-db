@@ -1,16 +1,16 @@
 import React from "react";
+import Image from "next/image";
+import { GetServerSideProps } from "next";
 import { fetcher, getMovie } from "../../libs/api";
 import { MovieFactory } from "../../libs/factories";
 import { Movie, MovieAttributes } from "../../libs/types";
-import { GetServerSideProps } from "next";
-import Image from "next/image";
 
 export default function MoviePage({
   movie: movie_,
 }: {
   movie: Movie & MovieAttributes;
 }) {
-  const movie = MovieFactory.create(movie_);
+  const movie = MovieFactory.create<Movie & MovieAttributes>(movie_);
 
   return (
     <div>

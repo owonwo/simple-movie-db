@@ -5,8 +5,24 @@ import { Movie } from "../libs/types";
 
 export const MovieCard: React.FC<{ movie: Movie }> = ({ movie }) => {
   return (
-    <Link key={movie.id} href={`/movie/${movie.id}`}>
-      <div style={{ width: 220, height: 330 }}>
+    <Link
+      key={movie.id}
+      href={`/movie/${movie.id}`}
+      style={{
+        display: "inline-flex",
+        flexDirection: "column",
+        width: 246,
+        border: "solid 1px #444",
+        padding: 8,
+      }}
+    >
+      <div
+        style={{
+          width: 220,
+          height: 330,
+          margin: 4,
+        }}
+      >
         {movie.poster_path ? (
           <Image
             src={movie.getPosterPath()}
@@ -15,9 +31,20 @@ export const MovieCard: React.FC<{ movie: Movie }> = ({ movie }) => {
             height={330}
           />
         ) : (
-          <>
-            No Image <br /> Available
-          </>
+          <div
+            style={{
+              width: 220,
+              height: 330,
+              display: "flex",
+              background: "#222",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <span style={{ textAlign: "center" }}>
+              No Image <br /> Available
+            </span>
+          </div>
         )}
       </div>
 
